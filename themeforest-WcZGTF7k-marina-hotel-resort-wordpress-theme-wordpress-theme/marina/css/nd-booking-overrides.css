@@ -252,3 +252,38 @@ html[lang="es-ES"] .nd_options_container {
 a#slider-5-slide-5-layer-39 {
   display: none;
 }
+
+@media (max-width: 768px) {
+  .nd_booking_alert_msg {
+    left: 10px;
+    right: 10px;
+    width: auto;
+  }
+
+  .nd_booking_display_inline_block {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .elem-group2 input[type="submit"] {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nd_booking_display_table table th,
+  .nd_booking_display_table table td,
+  .rooms table th,
+  .rooms table td,
+  #book-ddd table th,
+  #book-ddd table td {
+    font-size: 12px;
+    padding: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nd_booking_alert_msg,
+  .nicdark_navigation_1_sidebar_content {
+    transition: none;
+  }
+}

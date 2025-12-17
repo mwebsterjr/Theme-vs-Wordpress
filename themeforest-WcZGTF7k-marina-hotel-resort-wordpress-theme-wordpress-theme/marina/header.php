@@ -12,8 +12,10 @@
 <body id="start_nicdark_framework" <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
+<a class="nicdark-skip-link" href="#nicdark-content"><?php esc_html_e( 'Skip to content', 'marina' ); ?></a>
+
 <!--START theme-->
-<div class="nicdark_site nicdark_bg_white <?php if ( is_front_page() ) { echo esc_html("nicdark_front_page"); } ?> ">	
+<div id="nicdark-content" class="nicdark_site nicdark_bg_white <?php if ( is_front_page() ) { echo esc_html("nicdark_front_page"); } ?> ">
 	
 <?php if( get_option('nicdark_type_demo') == 1 ){}else{ ?>
 
@@ -106,7 +108,7 @@
 
     <div class="nicdark_bg_orange nicdark_width_300 nicdark_position_fixed nicdark_top_0 nicdark_text_align_center nicdark_margin_left_negative_40 nicdark_padding_top_20 nicdark_padding_bottom_20 nicdark_border_1_dashed_color">
 
-        <img alt="<?php esc_attr_e('Close mobile navigation','marina'); ?>" width="10" class="nicdark_close_navigation_1_sidebar_content nicdark_cursor_pointer nicdark_right_20 nicdark_top_29 nicdark_position_absolute" src="<?php echo esc_url(get_template_directory_uri()); ?>/img/icon-close.png" role="button">
+        <img alt="<?php esc_attr_e('Close mobile navigation','marina'); ?>" width="10" class="nicdark_close_navigation_1_sidebar_content nicdark_cursor_pointer nicdark_right_20 nicdark_top_29 nicdark_position_absolute" src="<?php echo esc_url(get_template_directory_uri()); ?>/img/icon-close.png" role="button" tabindex="0">
 
         <!--START LOGO OR TAGLINE-->
         <?php
@@ -139,7 +141,7 @@
     </div>
 
 
-    <div class="nicdark_navigation_1_sidebar">
+    <div class="nicdark_navigation_1_sidebar" tabindex="-1">
         <?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
     </div>
 
