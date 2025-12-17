@@ -13,8 +13,6 @@
       "defaultPalette": true
     },
     "layout": {
-      "contentSize": "700px",
-      "wideSize": "1200px"
       "contentSize": "760px",
       "wideSize": "1320px"
     },

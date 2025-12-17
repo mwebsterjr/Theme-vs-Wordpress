@@ -64,9 +64,9 @@
 
         <div class="nicdark_grid_8 nicdark_padding_0 nicdark_text_align_center_responsive">
 
-            <div class="nicdark_section nicdark_navigation_1">
-                <?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
-            </div>
+            <nav class="nicdark_section nicdark_navigation_1" aria-label="<?php esc_attr_e( 'Primary menu', 'marina' ); ?>">
+                <?php wp_nav_menu( array( 'theme_location' => 'main-menu', 'fallback_cb' => '__return_empty_string' ) ); ?>
+            </nav>
 
         </div>
 
@@ -89,7 +89,6 @@
             <!--open menu responsive icon-->
             <div class="nicdark_section nicdark_display_none nicdark_display_block_responsive">
                 <button class="nicdark_open_navigation_1_sidebar_content" type="button" aria-expanded="false" aria-controls="nicdark-mobile-nav" aria-label="<?php esc_attr_e('Open mobile navigation','marina'); ?>">
-                    <img alt="" width="25" src="<?php echo esc_url(get_template_directory_uri()); ?>/img/icon-menu-grey.png">
                     <img alt="" role="presentation" aria-hidden="true" width="25" height="25" src="<?php echo esc_url(get_template_directory_uri()); ?>/img/icon-menu-grey.png">
                 </button>
             </div>
@@ -118,7 +117,6 @@
     <div class="nicdark_bg_orange nicdark_width_300 nicdark_position_fixed nicdark_top_0 nicdark_text_align_center nicdark_margin_left_negative_40 nicdark_padding_top_20 nicdark_padding_bottom_20 nicdark_border_1_dashed_color">
 
         <button class="nicdark_close_navigation_1_sidebar_content nicdark_cursor_pointer nicdark_right_20 nicdark_top_29 nicdark_position_absolute" type="button" aria-label="<?php esc_attr_e('Close mobile navigation','marina'); ?>">
-            <img alt="" width="10" src="<?php echo esc_url(get_template_directory_uri()); ?>/img/icon-close.png">
             <img alt="" role="presentation" aria-hidden="true" width="10" height="10" src="<?php echo esc_url(get_template_directory_uri()); ?>/img/icon-close.png">
         </button>
 
@@ -160,8 +158,8 @@
     </div>
 
 
-    <div class="nicdark_navigation_1_sidebar" tabindex="-1">
-        <?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
+    <nav class="nicdark_navigation_1_sidebar" tabindex="-1" aria-label="<?php esc_attr_e( 'Primary', 'marina' ); ?>">
+        <?php wp_nav_menu( array( 'theme_location' => 'main-menu', 'fallback_cb' => '__return_empty_string' ) ); ?>
     </nav>
 
 

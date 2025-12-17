@@ -25,6 +25,11 @@ function nicdark_theme_setup_features() {
     add_theme_support( 'wp-block-styles' );
     add_theme_support( 'responsive-embeds' );
     add_theme_support( 'custom-background' );
+    add_theme_support( 'editor-styles' );
+    add_theme_support( 'custom-spacing' );
+    add_theme_support( 'custom-line-height' );
+    add_theme_support( 'custom-units', 'px', '%', 'em', 'rem', 'vw' );
+    add_theme_support( 'appearance-tools' );
     add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
     add_theme_support( 'custom-logo' );
     add_theme_support( 'custom-header' );
@@ -110,25 +115,3 @@ function nicdark_theme_setup(){
 }
 add_action( 'after_setup_theme', 'nicdark_theme_setup' );
 
- * Theme setup helpers.
- */
-
-/**
- * Sync the classic theme content width with theme.json layout settings.
- */
-function nicdark_set_content_width() {
-    $content_width = 760;
-    $global_settings = function_exists( 'wp_get_global_settings' ) ? wp_get_global_settings() : array();
-
-    if ( isset( $global_settings['layout']['contentSize'] ) && is_string( $global_settings['layout']['contentSize'] ) ) {
-        // Keep content width in step with theme.json so classic templates and embeds mirror block previews.
-        $parsed_width = floatval( $global_settings['layout']['contentSize'] );
-
-        if ( $parsed_width > 0 ) {
-            $content_width = $parsed_width;
-        }
-    }
-
-    $GLOBALS['content_width'] = $content_width;
-}
-add_action( 'after_setup_theme', 'nicdark_set_content_width', 0 );
