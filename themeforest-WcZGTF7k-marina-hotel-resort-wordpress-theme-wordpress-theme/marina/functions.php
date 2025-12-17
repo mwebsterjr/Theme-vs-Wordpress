@@ -1,5 +1,10 @@
 <?php
 
+if ( ! defined( 'NICDARK_THEME_VERSION' ) ) {
+    $nicdark_theme_object = wp_get_theme();
+    define( 'NICDARK_THEME_VERSION', $nicdark_theme_object->get( 'Version' ) ? $nicdark_theme_object->get( 'Version' ) : '1.0.0' );
+}
+
 $nicdark_themename = "marina";
 
 //TGMPA required plugin
@@ -88,53 +93,35 @@ function nicdark_register_required_plugins() {
 //END tgmpa
 
 
-//translation
-function nicdark_translation() {
-  load_theme_textdomain( 'marina', get_template_directory().'/languages' ); 
+function nicdark_theme_setup_features() {
+
+    load_theme_textdomain( 'marina', get_template_directory() . '/languages' );
+
+    register_nav_menus(
+        array(
+            'main-menu' => esc_html__( 'Main Menu', 'marina' ),
+        )
+    );
+
+    if ( ! isset( $GLOBALS['content_width'] ) ) {
+        $GLOBALS['content_width'] = 1330;
+    }
+
+    add_theme_support( 'automatic-feed-links' );
+    add_theme_support( 'post-thumbnails' );
+    add_theme_support( 'post-formats', array( 'quote', 'image', 'link', 'video', 'gallery', 'audio' ) );
+    add_theme_support( 'title-tag' );
+    add_theme_support( 'align-wide' );
+    add_theme_support( 'wp-block-styles' );
+    add_theme_support( 'responsive-embeds' );
+    add_theme_support( 'custom-background' );
+    add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
+    add_theme_support( 'custom-logo' );
+    add_theme_support( 'custom-header' );
+
+    add_editor_style( 'css/custom-editor-style.css' );
 }
-add_action( 'init', 'nicdark_translation' );
-
-
-//register my menus
-function nicdark_register_my_menus() {
-  register_nav_menu( 'main-menu', esc_html__( 'Main Menu', 'marina' ) );  
-}
-add_action( 'init', 'nicdark_register_my_menus' );
-
-
-//Content_width
-if (!isset($content_width )) $content_width  = 1330;
-
-
-//automatic-feed-links
-add_theme_support( 'automatic-feed-links' );
-
-//post-thumbnails
-add_theme_support( "post-thumbnails" );
-
-//post-formats
-add_theme_support( 'post-formats', array( 'quote', 'image', 'link', 'video', 'gallery', 'audio' ) );
-
-//title tag
-add_theme_support( 'title-tag' );
-
-//align-wide
-add_theme_support( 'align-wide' );
-
-//wp-block-styles
-add_theme_support( 'wp-block-styles' );
-
-//responsive-embeds
-add_theme_support( 'responsive-embeds' );
-
-//custom-background
-add_theme_support( 'custom-background' );
-
-add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
-
-add_theme_support( 'custom-logo' );
-
-add_theme_support( 'custom-header' );
+add_action( 'after_setup_theme', 'nicdark_theme_setup_features' );
 
 // Sidebar
 function nicdark_add_sidebars() {
@@ -155,17 +142,33 @@ add_action( 'widgets_init', 'nicdark_add_sidebars' );
 //add css and js
 function nicdark_enqueue_scripts()
 {
-	
+
+    $nicdark_version = defined( 'NICDARK_THEME_VERSION' ) ? NICDARK_THEME_VERSION : false;
+
     //css
-    wp_enqueue_style( 'nicdark-style', get_stylesheet_uri() );
-    wp_enqueue_style( 'nicdark-fonts', nicdark_google_fonts_url(), array(), '1.0.0' );
-    wp_enqueue_style( 'nicdark-fontss', nicdark_google_fontss_url(), array(), '1.0.0' );
+    wp_enqueue_style( 'nicdark-style', get_stylesheet_uri(), array(), $nicdark_version );
+
+    $nicdark_google_font = nicdark_google_fonts_url();
+    if ( $nicdark_google_font ) {
+        wp_enqueue_style( 'nicdark-fonts', $nicdark_google_font, array(), $nicdark_version );
+    }
+
+    $nicdark_google_font_secondary = nicdark_google_fontss_url();
+    if ( $nicdark_google_font_secondary ) {
+        wp_enqueue_style( 'nicdark-fontss', $nicdark_google_font_secondary, array(), $nicdark_version );
+    }
+
+    if ( post_type_exists( 'nd_booking_cpt_1' ) && ( is_singular( 'nd_booking_cpt_1' ) || is_post_type_archive( 'nd_booking_cpt_1' ) ) ) {
+        wp_enqueue_style( 'nicdark-nd-booking-overrides', get_template_directory_uri() . '/css/nd-booking-overrides.css', array( 'nicdark-style' ), $nicdark_version );
+    }
 
     //comment-reply
-    if ( is_singular() ) wp_enqueue_script( 'comment-reply' );
+    if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+        wp_enqueue_script( 'comment-reply' );
+    }
 
     //navigation
-    wp_enqueue_script('nicdark-navigation', get_template_directory_uri() . '/js/nicdark-navigation.js', array('jquery'), false, true );
+    wp_enqueue_script( 'nicdark-navigation', get_template_directory_uri() . '/js/nicdark-navigation.js', array( 'jquery' ), $nicdark_version, true );
 
 }
 add_action("wp_enqueue_scripts", "nicdark_enqueue_scripts");
@@ -173,18 +176,15 @@ add_action("wp_enqueue_scripts", "nicdark_enqueue_scripts");
 
 
 function nicdark_admin_enqueue_scripts() {
-  
-  wp_enqueue_style( 'nicdark-admin-style', get_template_directory_uri() . '/admin-style.css', array(), false, false );
-  
+
+  wp_enqueue_style( 'nicdark-admin-style', get_template_directory_uri() . '/admin-style.css', array(), NICDARK_THEME_VERSION, false );
+
 }
 add_action( 'admin_enqueue_scripts', 'nicdark_admin_enqueue_scripts' );
 
 
 //woocommerce support
 add_theme_support( 'woocommerce' );
-
-//editor style
-add_editor_style( 'css/custom-editor-style.css' );
 
 //add style to quote
 if ( function_exists( 'register_block_style' ) ) {
@@ -227,11 +227,17 @@ add_action( 'after_setup_theme', 'nicdark_theme_setup' );
 
 //START add google fonts
 function nicdark_google_fonts_url() {
-    
+
     $nicdark_font_url = '';
-    
+
     if ( 'off' !== _x( 'on', 'Google font: on or off', 'marina' ) ) {
-        $nicdark_font_url = add_query_arg( 'family', urlencode( 'Jost:300,400,500,600,700' ), "//fonts.googleapis.com/css" );
+        $nicdark_font_url = add_query_arg(
+            array(
+                'family' => urlencode( 'Jost:300,400,500,600,700' ),
+                'display' => 'swap',
+            ),
+            'https://fonts.googleapis.com/css'
+        );
     }
 
     return $nicdark_font_url;
@@ -241,11 +247,17 @@ function nicdark_google_fonts_url() {
 
 
 function nicdark_google_fontss_url() {
-    
+
     $nicdark_font_url = '';
-    
-    if ( 'off' !== _x( 'on', 'Google font: on or off', 'motela' ) ) {
-        $nicdark_font_url = add_query_arg( 'family', urlencode( 'Italiana:300,400,500,600,700' ), "//fonts.googleapis.com/css" );
+
+    if ( 'off' !== _x( 'on', 'Google font: on or off', 'marina' ) ) {
+        $nicdark_font_url = add_query_arg(
+            array(
+                'family' => urlencode( 'Italiana:300,400,500,600,700' ),
+                'display' => 'swap',
+            ),
+            'https://fonts.googleapis.com/css'
+        );
     }
 
     return $nicdark_font_url;

@@ -5,13 +5,46 @@ Description: Wonderful theme for your Business.
 Author: Nicdark
 Author URI: http://www.nicdarkthemes.com
 Version: 3.0
-Tested up to: 6.8
-Requires PHP: 7.0
+Tested up to: 6.9
+Requires PHP: 8.1
 License: http://www.nicdarkthemes.com
 License URI: http://www.nicdarkthemes.com
 Tags: one-column, two-columns, right-sidebar, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, sticky-post, translation-ready
 Text Domain: marina
 */
+
+.nicdark-skip-link {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    padding: 12px 18px;
+    background: #111;
+    color: #fff;
+    z-index: 9999;
+    border-radius: 4px;
+    text-decoration: none;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+.nicdark-skip-link:focus {
+    left: 16px;
+    top: 16px;
+}
+
+.nicdark_open_navigation_1_sidebar_content,
+.nicdark_close_navigation_1_sidebar_content {
+    outline: none;
+    background: transparent;
+    border: 0;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.nicdark_open_navigation_1_sidebar_content:focus-visible,
+.nicdark_close_navigation_1_sidebar_content:focus-visible {
+    outline: 2px solid #f5c26b;
+    outline-offset: 4px;
+}
 
 
 /* 
@@ -2207,11 +2240,42 @@ table {
 
 
 .nicdark_navigation_1 {
-    padding: 30px 20px 30px 20px;  
-  
+    padding: 30px 20px 30px 20px;
+
     background-repeat: no-repeat;
     background-position: 20px 54px;
-    background-size: 20px;  
+    background-size: 20px;
+}
+
+.nicdark_navigation_1_sidebar_content {
+    right: -320px;
+    width: 320px;
+    max-width: 90%;
+    transition: right 0.35s ease;
+}
+
+.nicdark_navigation_1_sidebar_content.is-open {
+    right: 0;
+    box-shadow: -6px 0 18px rgba(0,0,0,0.18);
+}
+
+.nicdark-mobile-nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease;
+    z-index: 998;
+}
+
+.nicdark-mobile-nav-overlay.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+body.nicdark_nav_open {
+    overflow: hidden;
 }
 
 
@@ -2230,6 +2294,10 @@ table {
         margin-top:-10px;
         margin-bottom:20px;
         display: inline-block;
+    }
+
+    .nicdark_navigation_1_sidebar_content {
+        padding: 60px 30px 40px 30px;
     }
 
 }

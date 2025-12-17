@@ -12,8 +12,10 @@
 <body id="start_nicdark_framework" <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
+<a class="nicdark-skip-link" href="#nicdark-content"><?php esc_html_e( 'Skip to content', 'marina' ); ?></a>
+
 <!--START theme-->
-<div class="nicdark_site nicdark_bg_white <?php if ( is_front_page() ) { echo esc_html("nicdark_front_page"); } ?> ">	
+<div id="nicdark-content" class="nicdark_site nicdark_bg_white <?php if ( is_front_page() ) { echo esc_html("nicdark_front_page"); } ?> ">
 	
 <?php if( get_option('nicdark_type_demo') == 1 ){}else{ ?>
 
@@ -55,8 +57,8 @@
 
         <div class="nicdark_grid_8 nicdark_padding_0 nicdark_text_align_center_responsive">
 
-            <div class="nicdark_section nicdark_navigation_1">        
-                <?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>       
+            <div class="nicdark_section nicdark_navigation_1">
+                <?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
             </div>
 
         </div>
@@ -79,9 +81,9 @@
 
             <!--open menu responsive icon-->
             <div class="nicdark_section nicdark_display_none nicdark_display_block_responsive">
-                <a class="nicdark_open_navigation_1_sidebar_content nicdark_open_navigation_1_sidebar_content" href="#">
-                    <img alt="<?php esc_attr_e('Open mobile navigation','marina'); ?>" width="25" src="<?php echo esc_url(get_template_directory_uri()); ?>/img/icon-menu-grey.png">
-                </a>
+                <button class="nicdark_open_navigation_1_sidebar_content" type="button" aria-expanded="false" aria-controls="nicdark-mobile-nav" aria-label="<?php esc_attr_e('Open mobile navigation','marina'); ?>">
+                    <img alt="" width="25" src="<?php echo esc_url(get_template_directory_uri()); ?>/img/icon-menu-grey.png">
+                </button>
             </div>
             <!--open menu responsive icon-->
 
@@ -102,11 +104,13 @@
 
 
 <!--START menu responsive-->
-<div class="nicdark_padding_100_40 nicdark_padding_bottom_40 nicdark_bg_black nicdark_custom_menu_bg nicdark_navigation_1_sidebar_content nicdark_box_sizing_border_box nicdark_overflow_hidden nicdark_overflow_y_auto nicdark_transition_all_08_ease nicdark_height_100_percentage nicdark_position_fixed nicdark_width_300 nicdark_right_300_negative nicdark_z_index_999">
+<div id="nicdark-mobile-nav" class="nicdark_padding_100_40 nicdark_padding_bottom_40 nicdark_bg_black nicdark_custom_menu_bg nicdark_navigation_1_sidebar_content nicdark_box_sizing_border_box nicdark_overflow_hidden nicdark_overflow_y_auto nicdark_transition_all_08_ease nicdark_height_100_percentage nicdark_position_fixed nicdark_width_300 nicdark_right_300_negative nicdark_z_index_999" aria-hidden="true" role="dialog" aria-modal="true" aria-label="<?php esc_attr_e( 'Mobile navigation', 'marina' ); ?>">
 
     <div class="nicdark_bg_orange nicdark_width_300 nicdark_position_fixed nicdark_top_0 nicdark_text_align_center nicdark_margin_left_negative_40 nicdark_padding_top_20 nicdark_padding_bottom_20 nicdark_border_1_dashed_color">
 
-        <img alt="<?php esc_attr_e('Close mobile navigation','marina'); ?>" width="10" class="nicdark_close_navigation_1_sidebar_content nicdark_cursor_pointer nicdark_right_20 nicdark_top_29 nicdark_position_absolute" src="<?php echo esc_url(get_template_directory_uri()); ?>/img/icon-close.png">
+        <button class="nicdark_close_navigation_1_sidebar_content nicdark_cursor_pointer nicdark_right_20 nicdark_top_29 nicdark_position_absolute" type="button" aria-label="<?php esc_attr_e('Close mobile navigation','marina'); ?>">
+            <img alt="" width="10" src="<?php echo esc_url(get_template_directory_uri()); ?>/img/icon-close.png">
+        </button>
 
         <!--START LOGO OR TAGLINE-->
         <?php
@@ -139,10 +143,13 @@
     </div>
 
 
-    <div class="nicdark_navigation_1_sidebar">
+    <nav class="nicdark_navigation_1_sidebar" tabindex="-1" aria-label="<?php esc_attr_e( 'Primary', 'marina' ); ?>">
         <?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
-    </div>
+    </nav>
 
+
+
+    <div class="nicdark-mobile-nav-overlay" aria-hidden="true"></div>
 
 </div>
 <!--END menu responsive-->
