@@ -13,6 +13,7 @@
         var lastTrigger = null;
 
         var focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+        var lastFocusedToggle = null;
 
         if ( ! $navigationToggle.length || ! $navigationPanel.length ) {
                 return;
@@ -32,6 +33,9 @@
         function nicdarkOpenNavigation(event) {
                 if ( event ) {
                         event.preventDefault();
+                        lastFocusedToggle = event.currentTarget;
+                } else {
+                        lastFocusedToggle = document.activeElement;
                         lastTrigger = $(event.currentTarget);
                 }
                 if ( ! lastTrigger || ! lastTrigger.length ) {
@@ -58,6 +62,13 @@
                 $navigationPanel.removeClass('is-open');
                 $('body').removeClass('nicdark_nav_open');
                 $navigationOverlay.removeClass('is-visible');
+                $navigationToggle.attr('aria-expanded', 'false');
+                $navigationPanel.attr('aria-hidden', 'true');
+                $navigationOverlay.attr('aria-hidden', 'true');
+                if ( lastFocusedToggle ) {
+                        $( lastFocusedToggle ).focus();
+                } else {
+                        $navigationToggle.focus();
                 setAriaExpanded(false);
                 setAriaHidden(true);
                 if ( lastTrigger && lastTrigger.length ) {
