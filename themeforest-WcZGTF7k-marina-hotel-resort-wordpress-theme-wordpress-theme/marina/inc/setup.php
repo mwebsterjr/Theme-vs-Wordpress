@@ -17,10 +17,6 @@ function nicdark_theme_setup_features() {
         )
     );
 
-    if ( ! isset( $GLOBALS['content_width'] ) ) {
-        $GLOBALS['content_width'] = 1330;
-    }
-
     add_theme_support( 'automatic-feed-links' );
     add_theme_support( 'post-thumbnails' );
     add_theme_support( 'post-formats', array( 'quote', 'image', 'link', 'video', 'gallery', 'audio' ) );
@@ -38,6 +34,29 @@ function nicdark_theme_setup_features() {
     add_editor_style( 'css/custom-editor-style.css' );
 }
 add_action( 'after_setup_theme', 'nicdark_theme_setup_features' );
+
+/**
+ * Align content width with theme.json layout values for consistent embeds/media rendering.
+ */
+function nicdark_set_content_width() {
+    $content_width = 760; // Default matches theme.json layout.contentSize.
+
+    if ( function_exists( 'wp_get_global_settings' ) ) {
+        $global_settings = wp_get_global_settings();
+
+        if ( ! empty( $global_settings['layout']['contentSize'] ) ) {
+            $content_width = intval( $global_settings['layout']['contentSize'] );
+        }
+    }
+
+    /**
+     * Filters the content width in pixels.
+     *
+     * @param int $content_width Maximum allowed width.
+     */
+    $GLOBALS['content_width'] = apply_filters( 'nicdark_content_width', $content_width );
+}
+add_action( 'after_setup_theme', 'nicdark_set_content_width', 0 );
 
 // Sidebar
 function nicdark_add_sidebars() {

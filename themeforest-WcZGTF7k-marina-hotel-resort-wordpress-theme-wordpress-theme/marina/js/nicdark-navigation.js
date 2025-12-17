@@ -12,6 +12,7 @@
         var $navigationOverlay = $('.nicdark-mobile-nav-overlay');
 
         var focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+        var lastFocusedToggle = null;
 
         if ( ! $navigationToggle.length || ! $navigationPanel.length ) {
                 return;
@@ -20,6 +21,9 @@
         function nicdarkOpenNavigation(event) {
                 if ( event ) {
                         event.preventDefault();
+                        lastFocusedToggle = event.currentTarget;
+                } else {
+                        lastFocusedToggle = document.activeElement;
                 }
                 $navigationPanel.addClass('is-open');
                 $('body').addClass('nicdark_nav_open');
@@ -43,7 +47,11 @@
                 $navigationToggle.attr('aria-expanded', 'false');
                 $navigationPanel.attr('aria-hidden', 'true');
                 $navigationOverlay.attr('aria-hidden', 'true');
-                $navigationToggle.focus();
+                if ( lastFocusedToggle ) {
+                        $( lastFocusedToggle ).focus();
+                } else {
+                        $navigationToggle.focus();
+                }
         }
 
         $navigationToggle.on('click', nicdarkOpenNavigation);
