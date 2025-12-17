@@ -300,10 +300,11 @@ body{
 }
 
 /* 1.2 container */
-.nicdark_container{ 
-    width:1350px; 
-    margin:auto; 
-    padding: 0px; 
+.nicdark_container{
+    width: 100%;
+    max-width: 1320px;
+    margin:auto;
+    padding: 0 clamp(16px, 3vw, 40px);
 }
 
 .nicdark_clearfix:after { 
@@ -4142,12 +4143,31 @@ iframe#twitter-widget-0{
 
 /* 11 RESPONSIVE ------------------------------------------------------- */
 
+/* 11.0 desktop xl*/
+@media only screen and (min-width: 1440px) {
 
-/* 11.1 ipad land*/
-@media only screen and (min-width: 960px) and (max-width: 1349px) {
-    
     .nicdark_container{
-        width:960px;
+        max-width: 1400px;
+        padding: 0 clamp(18px, 2vw, 48px);
+    }
+
+}
+
+/* 11.1 large laptop*/
+@media only screen and (min-width: 1280px) and (max-width: 1439px) {
+
+    .nicdark_container{
+        max-width: 1320px;
+    }
+
+}
+
+/* 11.2 laptop / tablet landscape*/
+@media only screen and (min-width: 1024px) and (max-width: 1279px) {
+
+    .nicdark_container{
+        max-width: 1180px;
+        padding: 0 clamp(18px, 3vw, 36px);
     }
 
     .nicdark_grid_1,
@@ -4161,21 +4181,26 @@ iframe#twitter-widget-0{
     .nicdark_grid_9,
     .nicdark_grid_10,
     .nicdark_grid_11,
-    .nicdark_grid_12 { 
-        width: 100%; 
+    .nicdark_grid_12 {
+        width: 100%;
     }
 
 }
 
-/* 11.2 ipad port*/
-@media only screen and (min-width: 768px) and (max-width: 959px) {
-    
+/* 11.3 tablet portrait*/
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+
+    body{
+        -webkit-text-size-adjust:none;
+    }
+
     .nicdark_container {
-        width:748px;
+        max-width: 980px;
+        padding: 0 clamp(18px, 4vw, 36px);
     }
 
-    .nicdark_width_100_percentage_ipad_port { 
-        width: 100%; 
+    .nicdark_width_100_percentage_ipad_port {
+        width: 100%;
     }
 
     .nicdark_grid_1,
@@ -4189,21 +4214,22 @@ iframe#twitter-widget-0{
     .nicdark_grid_9,
     .nicdark_grid_10,
     .nicdark_grid_11,
-    .nicdark_grid_12 { 
-        width: 100%; 
+    .nicdark_grid_12 {
+        width: 100%;
     }
 
 }
 
-/* 11.3 iphone land*/
+/* 11.4 large phones / small tablets*/
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-    
-    body{ 
-        -webkit-text-size-adjust:none; 
+
+    body{
+        -webkit-text-size-adjust:none;
     }
 
     .nicdark_container {
-        width:460px;
+        max-width: 760px;
+        padding: 0 clamp(16px, 5vw, 28px);
     }
 
     .nicdark_grid_1,
@@ -4217,29 +4243,30 @@ iframe#twitter-widget-0{
     .nicdark_grid_9,
     .nicdark_grid_10,
     .nicdark_grid_11,
-    .nicdark_grid_12 { 
-        width: 100%; 
+    .nicdark_grid_12 {
+        width: 100%;
     }
 
 }
 
-/* 11.4 iphone port*/
+/* 11.5 phones*/
 @media only screen and (min-width: 320px) and (max-width: 479px){
-    
-    body{ 
-        -webkit-text-size-adjust:none; 
+
+    body{
+        -webkit-text-size-adjust:none;
     }
 
-    .nicdark_container{ 
-        width:320px;
+    .nicdark_container{
+        max-width: 460px;
+        padding: 0 clamp(14px, 6vw, 22px);
     }
 
-    .nicdark_width_100_percentage_iphone_port { 
-        width: 100%; 
+    .nicdark_width_100_percentage_iphone_port {
+        width: 100%;
     }
 
-    .nicdark_text_align_left_iphone_port { 
-        text-align: left; 
+    .nicdark_text_align_left_iphone_port {
+        text-align: left;
     }
 
     .nicdark_grid_1,
@@ -4253,147 +4280,148 @@ iframe#twitter-widget-0{
     .nicdark_grid_9,
     .nicdark_grid_10,
     .nicdark_grid_11,
-    .nicdark_grid_12{ 
-        width: 100%; 
-        padding:15px 10px; 
-    } 
-
-}
-
-/* 11.5 all responsive*/
-@media only screen and (min-width: 320px) and (max-width: 1349px) {
-    
-    .nicdark_display_none_all_responsive { 
-        display: none; 
-    }
-
-    .nicdark_display_block_responsive { 
-        display: block; 
-    }
-
-    .nicdark_width_100_percentage_responsive { 
-        width: 100%; 
-    }
-
-    .nicdark_width_50_percentage_responsive { 
-        width: 50%; 
-    }
-
-    .nicdark_text_align_center_responsive { 
-        text-align: center; 
-    }
-
-    .nicdark_text_align_left_responsive { 
-        text-align: left; 
-    }
-
-    .nicdark_margin_top_5_responsive { 
-        margin-top: 5px; 
-    }
-
-    .nicdark_border_top_1_solid_greydark_responsive { 
-        border-top: 1px solid #0b162c; 
-    }
-
-    .nicdark_cursor_move_responsive { 
-        cursor: move; 
-    }
-
-    .nicdark_font_size_40_responsive { 
-        font-size: 40px; 
-    }
-
-    .nicdark_line_height_40_responsive { 
-        line-height: 40px; 
-    }
-
-    .nicdark_padding_20_responsive { 
-        padding: 20px; 
-    }
-
-    .nicdark_padding_20_0_responsive { 
-        padding: 20px 0px; 
-    }
-
-    .nicdark_padding_bottom_0_responsive { 
-        padding-bottom:0px; 
+    .nicdark_grid_12{
+        width: 100%;
+        padding:15px 10px;
     }
 
 }
 
-/* 11.6 all iphone*/
+/* 11.6 all responsive utilities*/
+@media only screen and (min-width: 320px) and (max-width: 1439px) {
+
+    .nicdark_display_none_all_responsive {
+        display: none;
+    }
+
+    .nicdark_display_block_responsive {
+        display: block;
+    }
+
+    .nicdark_width_100_percentage_responsive {
+        width: 100%;
+    }
+
+    .nicdark_width_50_percentage_responsive {
+        width: 50%;
+    }
+
+    .nicdark_text_align_center_responsive {
+        text-align: center;
+    }
+
+    .nicdark_text_align_left_responsive {
+        text-align: left;
+    }
+
+    .nicdark_margin_top_5_responsive {
+        margin-top: 5px;
+    }
+
+    .nicdark_border_top_1_solid_greydark_responsive {
+        border-top: 1px solid #0b162c;
+    }
+
+    .nicdark_cursor_move_responsive {
+        cursor: move;
+    }
+
+    .nicdark_padding_20_responsive {
+        padding: 20px;
+    }
+
+    .nicdark_padding_20_0_responsive {
+        padding: 20px 0px;
+    }
+
+    .nicdark_padding_bottom_0_responsive {
+        padding-bottom:0px;
+    }
+
+    .nicdark_font_size_40_responsive {
+        font-size: 40px;
+    }
+
+    .nicdark_line_height_40_responsive {
+        line-height: 40px;
+    }
+
+}
+
+/* 11.7 all phones utilities*/
 @media only screen and (min-width: 320px) and (max-width: 767px) {
-    
-    .nicdark_display_none_all_iphone { 
-        display: none; 
+
+    .nicdark_display_none_all_iphone {
+        display: none;
     }
 
     .nicdark_display_block_all_iphone {
-        display: block; 
+        display: block;
     }
 
-    .nicdark_width_100_percentage_all_iphone { 
-        width: 100%; 
+    .nicdark_width_100_percentage_all_iphone {
+        width: 100%;
     }
 
-    .nicdark_width_50_percentage_all_iphone { 
-        width: 50%; 
+    .nicdark_width_50_percentage_all_iphone {
+        width: 50%;
     }
 
-    .nicdark_width_50_all_iphone { 
-        width: 50px; 
+    .nicdark_width_50_all_iphone {
+        width: 50px;
     }
 
-    .nicdark_width_250_all_iphone { 
-        width: 250px; 
+    .nicdark_width_250_all_iphone {
+        width: 250px;
     }
 
-    .nicdark_text_align_center_all_iphone { 
-        text-align: center; 
+    .nicdark_text_align_center_all_iphone {
+        text-align: center;
     }
 
-    .nicdark_padding_right_0_all_iphone { 
-        padding-right: 0px; 
+    .nicdark_padding_right_0_all_iphone {
+        padding-right: 0px;
     }
 
-    .nicdark_padding_left_0_all_iphone { 
-        padding-left: 0px; 
+    .nicdark_padding_left_0_all_iphone {
+        padding-left: 0px;
     }
 
-    .nicdark_padding_0_all_iphone { 
-        padding: 0px; 
+    .nicdark_padding_0_all_iphone {
+        padding: 0px;
     }
 
-    .nicdark_padding_40_all_iphone { 
-        padding: 40px; 
+    .nicdark_padding_40_all_iphone {
+        padding: 40px;
     }
 
-    .nicdark_font_size_40_all_iphone { 
-        font-size: 40px; 
+    .nicdark_font_size_40_all_iphone {
+        font-size: 40px;
     }
 
-    .nicdark_font_size_20_all_iphone { 
-        font-size: 20px; 
+    .nicdark_font_size_20_all_iphone {
+        font-size: 20px;
     }
 
-    .nicdark_font_size_10_all_iphone { 
-        font-size: 10px; 
+    .nicdark_font_size_10_all_iphone {
+        font-size: 10px;
     }
 
-    .nicdark_line_height_40_all_iphone { 
-        line-height: 40px; 
+    .nicdark_line_height_40_all_iphone {
+        line-height: 40px;
     }
 
-    .nicdark_line_height_20_all_iphone { 
-        line-height: 20px; 
+    .nicdark_line_height_20_all_iphone {
+        line-height: 20px;
     }
 
-    .nicdark_position_relative_all_iphone { 
-        position: relative; 
+    .nicdark_position_relative_all_iphone {
+        position: relative;
     }
 
-    .nicdark_margin_top_20_all_iphone { 
-        margin-top: 20px; 
+    .nicdark_margin_top_20_all_iphone {
+        margin-top: 20px;
     }
 
 }
+

@@ -5,7 +5,10 @@ if ( ! defined( 'NICDARK_THEME_VERSION' ) ) {
     define( 'NICDARK_THEME_VERSION', $nicdark_theme_object->get( 'Version' ) ? $nicdark_theme_object->get( 'Version' ) : '1.0.0' );
 }
 
+
 $nicdark_themename = "marina";
+
+require_once get_template_directory() . '/inc/setup.php';
 
 //TGMPA required plugin
 require_once get_template_directory() . '/class-tgm-plugin-activation.php';
@@ -18,7 +21,7 @@ function nicdark_register_required_plugins() {
         array(
             'name'      => esc_html__( 'Wordpress Importer', 'marina' ),
             'slug'      => 'wordpress-importer',
-            'required'  => true,
+            'required'  => false,
         ),
 
 
@@ -49,28 +52,28 @@ function nicdark_register_required_plugins() {
         array(
             'name'      => esc_html__( 'Contact Form 7', 'marina' ),
             'slug'      => 'contact-form-7',
-            'required'  => true,
+            'required'  => false,
         ),
 
         //woocommerce
         array(
             'name'      => esc_html__( 'WooCommerce', 'marina' ),
             'slug'      => 'woocommerce',
-            'required'  => true,
+            'required'  => false,
         ),
 
         //motopress-hotel-booking-lite
         array(
             'name'      => esc_html__( 'Hotel Booking', 'marina' ),
             'slug'      => 'motopress-hotel-booking-lite',
-            'required'  => true,
+            'required'  => false,
         ),
 
         //mphb-elementor
         array(
             'name'      => esc_html__( 'Hotel Booking - Elementor', 'marina' ),
             'slug'      => 'mphb-elementor',
-            'required'  => true,
+            'required'  => false,
         ),
         
 
@@ -92,6 +95,10 @@ function nicdark_register_required_plugins() {
 }
 //END tgmpa
 
+// Load modular theme setup to reduce functions.php size and improve maintainability.
+require_once get_template_directory() . '/inc/setup.php';
+require_once get_template_directory() . '/inc/enqueue.php';
+require_once get_template_directory() . '/inc/elementor.php';
 
 function nicdark_theme_setup_features() {
 
@@ -326,7 +333,7 @@ function nicdark_customizer_header( $wp_customize ) {
       'theme_supports' => '', // Rarely needed.
       'default' => '',
       'transport' => 'refresh', // or postMessage
-      'sanitize_callback' => 'sanitize_url',
+      'sanitize_callback' => 'esc_url_raw',
     ) );
 
     $wp_customize->add_control( 'nicdark_link_header_button', array(
