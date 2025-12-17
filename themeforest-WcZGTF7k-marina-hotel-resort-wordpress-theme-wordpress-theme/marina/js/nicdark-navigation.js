@@ -10,6 +10,7 @@
         var $navigationPanel = $('.nicdark_navigation_1_sidebar_content');
         var $navigationClose = $('.nicdark_close_navigation_1_sidebar_content');
         var $navigationOverlay = $('.nicdark-mobile-nav-overlay');
+        var lastTrigger = null;
 
         var focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
 
@@ -17,19 +18,36 @@
                 return;
         }
 
+        function setAriaHidden(isHidden) {
+                $navigationPanel.attr('aria-hidden', isHidden ? 'true' : 'false');
+                $navigationOverlay.attr('aria-hidden', isHidden ? 'true' : 'false');
+        }
+
+        function setAriaExpanded(isExpanded) {
+                var value = isExpanded ? 'true' : 'false';
+                $navigationToggle.attr('aria-expanded', value);
+                $navigationClose.attr('aria-expanded', value);
+        }
+
         function nicdarkOpenNavigation(event) {
                 if ( event ) {
                         event.preventDefault();
+                        lastTrigger = $(event.currentTarget);
+                }
+                if ( ! lastTrigger || ! lastTrigger.length ) {
+                        lastTrigger = $navigationToggle.first();
                 }
                 $navigationPanel.addClass('is-open');
                 $('body').addClass('nicdark_nav_open');
                 $navigationOverlay.addClass('is-visible');
-                $navigationToggle.attr('aria-expanded', 'true');
-                $navigationPanel.attr('aria-hidden', 'false');
-                $navigationOverlay.attr('aria-hidden', 'false');
+                setAriaExpanded(true);
+                setAriaHidden(false);
+
                 var focusable = $navigationPanel.find(focusableSelector).filter(':visible');
                 if ( focusable.length ) {
                         focusable.first().focus();
+                } else {
+                        $navigationPanel.attr('tabindex', '-1').focus();
                 }
         }
 
@@ -40,17 +58,23 @@
                 $navigationPanel.removeClass('is-open');
                 $('body').removeClass('nicdark_nav_open');
                 $navigationOverlay.removeClass('is-visible');
-                $navigationToggle.attr('aria-expanded', 'false');
-                $navigationPanel.attr('aria-hidden', 'true');
-                $navigationOverlay.attr('aria-hidden', 'true');
-                $navigationToggle.focus();
+                setAriaExpanded(false);
+                setAriaHidden(true);
+                if ( lastTrigger && lastTrigger.length ) {
+                        lastTrigger.focus();
+                } else {
+                        $navigationToggle.first().focus();
+                }
         }
+
+        setAriaExpanded($navigationPanel.hasClass('is-open'));
+        setAriaHidden(! $navigationPanel.hasClass('is-open'));
 
         $navigationToggle.on('click', nicdarkOpenNavigation);
         $navigationClose.on('click', nicdarkCloseNavigation);
 
         $(document).on('keyup', function(event) {
-                if ( event.key === 'Escape' ) {
+                if ( event.key === 'Escape' && $navigationPanel.hasClass('is-open') ) {
                         nicdarkCloseNavigation();
                 }
         });
@@ -63,6 +87,9 @@
                 }
 
                 var focusable = $navigationPanel.find(focusableSelector).filter(':visible');
+                if ( ! focusable.length && $navigationPanel.is(':visible') ) {
+                        focusable = $navigationPanel;
+                }
                 if ( ! focusable.length ) {
                         return;
                 }
