@@ -110,6 +110,10 @@ function nicdark_theme_setup_features() {
         )
     );
 
+    if ( ! isset( $GLOBALS['content_width'] ) ) {
+        $GLOBALS['content_width'] = 1330;
+    }
+
     add_theme_support( 'automatic-feed-links' );
     add_theme_support( 'post-thumbnails' );
     add_theme_support( 'post-formats', array( 'quote', 'image', 'link', 'video', 'gallery', 'audio' ) );
