@@ -40,13 +40,20 @@
 
             }else{ 
 
-                $nicdark_customizer_logo_img = wp_get_attachment_url($nicdark_customizer_logo_img);
+                $nicdark_customizer_logo_id  = absint( $nicdark_customizer_logo_img );
+                $nicdark_customizer_logo_img = wp_get_attachment_image( $nicdark_customizer_logo_id, 'medium', false, array(
+                    'class'    => 'nicdark_width_230',
+                    'loading'  => 'eager',
+                    'decoding' => 'async',
+                    'alt'      => esc_attr( get_bloginfo( 'name' ) ),
+                    'sizes'    => '(max-width: 600px) 180px, 230px',
+                ) );
 
             ?>
 
             <div class="nicdark_grid_2 nicdark_logo_section nicdark_padding_0 nicdark_text_align_center_responsive nicdark_text_align_left">
                 <a href="<?php echo esc_url(home_url()); ?>">
-                    <img class="nicdark_width_230" src="<?php echo esc_url($nicdark_customizer_logo_img); ?>">
+                    <?php echo wp_kses_post( $nicdark_customizer_logo_img ); ?>
                 </a>
             </div>
 
@@ -82,7 +89,7 @@
             <!--open menu responsive icon-->
             <div class="nicdark_section nicdark_display_none nicdark_display_block_responsive">
                 <button class="nicdark_open_navigation_1_sidebar_content" type="button" aria-expanded="false" aria-controls="nicdark-mobile-nav" aria-label="<?php esc_attr_e('Open mobile navigation','marina'); ?>">
-                    <img alt="" width="25" src="<?php echo esc_url(get_template_directory_uri()); ?>/img/icon-menu-grey.png">
+                    <img alt="" role="presentation" aria-hidden="true" width="25" height="25" src="<?php echo esc_url(get_template_directory_uri()); ?>/img/icon-menu-grey.png">
                 </button>
             </div>
             <!--open menu responsive icon-->
@@ -109,7 +116,7 @@
     <div class="nicdark_bg_orange nicdark_width_300 nicdark_position_fixed nicdark_top_0 nicdark_text_align_center nicdark_margin_left_negative_40 nicdark_padding_top_20 nicdark_padding_bottom_20 nicdark_border_1_dashed_color">
 
         <button class="nicdark_close_navigation_1_sidebar_content nicdark_cursor_pointer nicdark_right_20 nicdark_top_29 nicdark_position_absolute" type="button" aria-label="<?php esc_attr_e('Close mobile navigation','marina'); ?>">
-            <img alt="" width="10" src="<?php echo esc_url(get_template_directory_uri()); ?>/img/icon-close.png">
+            <img alt="" role="presentation" aria-hidden="true" width="10" height="10" src="<?php echo esc_url(get_template_directory_uri()); ?>/img/icon-close.png">
         </button>
 
         <!--START LOGO OR TAGLINE-->
@@ -128,12 +135,19 @@
 
             }else{ 
 
-                $nicdark_customizer_logo_img = wp_get_attachment_url($nicdark_customizer_logo_img);
+                $nicdark_customizer_logo_id  = absint( $nicdark_customizer_logo_img );
+                $nicdark_customizer_logo_img = wp_get_attachment_image( $nicdark_customizer_logo_id, 'medium', false, array(
+                    'class'    => 'nicdark_section',
+                    'loading'  => 'lazy',
+                    'decoding' => 'async',
+                    'alt'      => esc_attr( get_bloginfo( 'name' ) ),
+                    'sizes'    => '(max-width: 600px) 200px, 260px',
+                ) );
 
             ?>
 
             <a class="nicdark_padding_50 nicdark_float_left nicdark_width_100_percentage nicdark_box_sizing_border_box nicdark_padding_top_0 nicdark_padding_botttom_0" href="<?php echo esc_url(home_url()); ?>">
-                <img class="nicdark_section" src="<?php echo esc_url($nicdark_customizer_logo_img); ?>">
+                <?php echo wp_kses_post( $nicdark_customizer_logo_img ); ?>
             </a>
 
         <?php } ?>

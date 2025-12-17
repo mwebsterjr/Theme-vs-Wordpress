@@ -265,6 +265,29 @@ function nicdark_google_fontss_url() {
 }
 //END add google fonts
 
+// Add preconnect hints for Google Fonts when used.
+function nicdark_resource_hints( $urls, $relation_type ) {
+    if ( 'preconnect' !== $relation_type ) {
+        return $urls;
+    }
+
+    $fonts_enqueued = wp_style_is( 'nicdark-fonts', 'enqueued' ) || wp_style_is( 'nicdark-fontss', 'enqueued' );
+
+    if ( $fonts_enqueued ) {
+        $urls[] = array(
+            'href'        => 'https://fonts.googleapis.com',
+            'crossorigin' => true,
+        );
+        $urls[] = array(
+            'href'        => 'https://fonts.gstatic.com',
+            'crossorigin' => true,
+        );
+    }
+
+    return $urls;
+}
+add_filter( 'wp_resource_hints', 'nicdark_resource_hints', 10, 2 );
+
 
 
 //START create elementor widget
