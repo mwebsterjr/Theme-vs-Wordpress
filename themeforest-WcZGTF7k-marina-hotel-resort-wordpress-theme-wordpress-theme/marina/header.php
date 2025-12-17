@@ -111,6 +111,7 @@
 
 
 <!--START menu responsive-->
+<div id="nicdark-mobile-nav" class="nicdark_padding_100_40 nicdark_padding_bottom_40 nicdark_bg_black nicdark_custom_menu_bg nicdark_navigation_1_sidebar_content nicdark_box_sizing_border_box nicdark_overflow_hidden nicdark_overflow_y_auto nicdark_transition_all_08_ease nicdark_height_100_percentage nicdark_position_fixed nicdark_width_300 nicdark_right_300_negative nicdark_z_index_999" aria-hidden="true">
 <div id="nicdark-mobile-nav" class="nicdark_padding_100_40 nicdark_padding_bottom_40 nicdark_bg_black nicdark_custom_menu_bg nicdark_navigation_1_sidebar_content nicdark_box_sizing_border_box nicdark_overflow_hidden nicdark_overflow_y_auto nicdark_transition_all_08_ease nicdark_height_100_percentage nicdark_position_fixed nicdark_width_300 nicdark_right_300_negative nicdark_z_index_999" aria-hidden="true" role="dialog" aria-modal="true" aria-label="<?php esc_attr_e( 'Mobile navigation', 'marina' ); ?>">
 
     <div class="nicdark_bg_orange nicdark_width_300 nicdark_position_fixed nicdark_top_0 nicdark_text_align_center nicdark_margin_left_negative_40 nicdark_padding_top_20 nicdark_padding_bottom_20 nicdark_border_1_dashed_color">
@@ -161,6 +162,9 @@
         <?php wp_nav_menu( array( 'theme_location' => 'main-menu', 'fallback_cb' => '__return_empty_string' ) ); ?>
     </nav>
 
+
+
+    <div class="nicdark-mobile-nav-overlay" aria-hidden="true"></div>
 
 
     <div class="nicdark-mobile-nav-overlay" aria-hidden="true"></div>
