@@ -5,6 +5,7 @@ if ( ! defined( 'NICDARK_THEME_VERSION' ) ) {
     define( 'NICDARK_THEME_VERSION', $nicdark_theme_object->get( 'Version' ) ? $nicdark_theme_object->get( 'Version' ) : '1.0.0' );
 }
 
+
 $nicdark_themename = "marina";
 
 //TGMPA required plugin
@@ -92,187 +93,10 @@ function nicdark_register_required_plugins() {
 }
 //END tgmpa
 
-
-function nicdark_theme_setup_features() {
-
-    load_theme_textdomain( 'marina', get_template_directory() . '/languages' );
-
-    register_nav_menus(
-        array(
-            'main-menu' => esc_html__( 'Main Menu', 'marina' ),
-        )
-    );
-
-    if ( ! isset( $GLOBALS['content_width'] ) ) {
-        $GLOBALS['content_width'] = 1330;
-    }
-
-    add_theme_support( 'automatic-feed-links' );
-    add_theme_support( 'post-thumbnails' );
-    add_theme_support( 'post-formats', array( 'quote', 'image', 'link', 'video', 'gallery', 'audio' ) );
-    add_theme_support( 'title-tag' );
-    add_theme_support( 'align-wide' );
-    add_theme_support( 'wp-block-styles' );
-    add_theme_support( 'responsive-embeds' );
-    add_theme_support( 'custom-background' );
-    add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
-    add_theme_support( 'custom-logo' );
-    add_theme_support( 'custom-header' );
-
-    add_editor_style( 'css/custom-editor-style.css' );
-}
-add_action( 'after_setup_theme', 'nicdark_theme_setup_features' );
-
-// Sidebar
-function nicdark_add_sidebars() {
-
-    // Sidebar Main
-    register_sidebar(array(
-        'name' =>  esc_html__('Sidebar','marina'),
-        'id' => 'nicdark_sidebar',
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget' => '</div>',
-        'before_title' => '<h3>',
-        'after_title' => '</h3>',
-    ));
-
-}
-add_action( 'widgets_init', 'nicdark_add_sidebars' );
-
-//add css and js
-function nicdark_enqueue_scripts()
-{
-
-    $nicdark_version = defined( 'NICDARK_THEME_VERSION' ) ? NICDARK_THEME_VERSION : false;
-
-    //css
-    wp_enqueue_style( 'nicdark-style', get_stylesheet_uri(), array(), $nicdark_version );
-
-    $nicdark_google_font = nicdark_google_fonts_url();
-    if ( $nicdark_google_font ) {
-        wp_enqueue_style( 'nicdark-fonts', $nicdark_google_font, array(), $nicdark_version );
-    }
-
-    if ( post_type_exists( 'nd_booking_cpt_1' ) && ( is_singular( 'nd_booking_cpt_1' ) || is_post_type_archive( 'nd_booking_cpt_1' ) ) ) {
-        wp_enqueue_style( 'nicdark-nd-booking-overrides', get_template_directory_uri() . '/css/nd-booking-overrides.css', array( 'nicdark-style' ), $nicdark_version );
-    }
-
-    //comment-reply
-    if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-        wp_enqueue_script( 'comment-reply' );
-    }
-
-    //navigation
-    wp_enqueue_script( 'nicdark-navigation', get_template_directory_uri() . '/js/nicdark-navigation.js', array( 'jquery' ), $nicdark_version, true );
-
-}
-add_action("wp_enqueue_scripts", "nicdark_enqueue_scripts");
-//end js
-
-
-function nicdark_admin_enqueue_scripts() {
-
-  wp_enqueue_style( 'nicdark-admin-style', get_template_directory_uri() . '/admin-style.css', array(), NICDARK_THEME_VERSION, false );
-
-}
-add_action( 'admin_enqueue_scripts', 'nicdark_admin_enqueue_scripts' );
-
-
-//woocommerce support
-add_theme_support( 'woocommerce' );
-
-//add style to quote
-if ( function_exists( 'register_block_style' ) ) {
-    register_block_style(
-        'core/quote',
-        array(
-            'name'         => 'blue-quote',
-            'label'        => __( 'Blue Quote', 'marina' ),
-            'is_default'   => true,
-            'inline_style' => '.wp-block-quote.is-style-blue-quote { color: blue; }',
-        )
-    );
-}
-
-//add block pattern
-function nicdark_register_block_patterns() {
-        register_block_pattern(
-            'wpdocs/nd-pattern',
-            array(
-                'title'         => __( 'ND Pattern', 'marina' ),
-                'description'   => _x( 'Awesome ND Pattern', 'Use this nicdark pattern', 'marina' ),
-                'content'       => '<!-- wp:paragraph --><p>Nicdark Pattern</p><!-- /wp:paragraph -->',
-                'categories'    => array( 'text' ),
-                'keywords'      => array( 'nicdark' ),
-                'viewportWidth' => 800,
-            )
-        );
-}
-add_action( 'init', 'nicdark_register_block_patterns' );
-
-
-
-//define nicdark theme option
-function nicdark_theme_setup(){
-    add_option( 'nicdark_theme_author', 1, '', 'yes' );
-    update_option( 'nicdark_theme_author', 1 );
-}
-add_action( 'after_setup_theme', 'nicdark_theme_setup' );
-
-
-//START add google fonts
-function nicdark_google_fonts_url() {
-
-    $nicdark_font_url = '';
-
-    if ( 'off' !== _x( 'on', 'Google font: on or off', 'marina' ) ) {
-        $nicdark_font_url = add_query_arg(
-            array(
-                'family' => urlencode( 'Jost:300,400,500,600,700|Italiana:400,500,600,700' ),
-                'display' => 'swap',
-            ),
-            'https://fonts.googleapis.com/css'
-        );
-    }
-
-    return $nicdark_font_url;
-
-}
-//END add google fonts
-
-// Add preconnect hints for Google Fonts when used.
-function nicdark_resource_hints( $urls, $relation_type ) {
-    if ( 'preconnect' !== $relation_type ) {
-        return $urls;
-    }
-
-    $fonts_enqueued = wp_style_is( 'nicdark-fonts', 'enqueued' );
-
-    if ( $fonts_enqueued ) {
-        $urls[] = array(
-            'href'        => 'https://fonts.googleapis.com',
-            'crossorigin' => true,
-        );
-        $urls[] = array(
-            'href'        => 'https://fonts.gstatic.com',
-            'crossorigin' => true,
-        );
-    }
-
-    return $urls;
-}
-add_filter( 'wp_resource_hints', 'nicdark_resource_hints', 10, 2 );
-
-
-
-//START create elementor widget
-function nicdark_elementor_marina_post_grid_widget( $widgets_manager ) {
-
-    require_once( __DIR__ . '/widgets/post-grid.php' );
-    $widgets_manager->register( new \marina_Post_Grid_Widget() );
-
-}
-add_action( 'elementor/widgets/register', 'nicdark_elementor_marina_post_grid_widget' );
+// Load modular theme setup to reduce functions.php size and improve maintainability.
+require_once get_template_directory() . '/inc/setup.php';
+require_once get_template_directory() . '/inc/enqueue.php';
+require_once get_template_directory() . '/inc/elementor.php';
 
 
 
@@ -324,7 +148,7 @@ function nicdark_customizer_header( $wp_customize ) {
       'theme_supports' => '', // Rarely needed.
       'default' => '',
       'transport' => 'refresh', // or postMessage
-      'sanitize_callback' => 'sanitize_url',
+      'sanitize_callback' => 'esc_url_raw',
     ) );
 
     $wp_customize->add_control( 'nicdark_link_header_button', array(
