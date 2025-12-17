@@ -1,0 +1,289 @@
+/*
+ * ND Booking / Elementor / EAEL / UFG overrides
+ * Imported from "OLD single-cpt-1.php" guidance.
+ */
+
+:root {
+  --brand-green: #195f2b;
+  --brand-gold: #ae8631;
+  --ink: #111;
+  --slate: #585f77;
+  --offwhite: antiquewhite;
+}
+
+/* ===== Alerts ===== */
+.nd_booking_alert_msg {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #d34949;
+  padding: 15px 25px;
+  z-index: 9;
+  cursor: pointer;
+  display: none;
+}
+
+.nd_booking_alert_msg.is-visible {
+  display: block;
+}
+
+/* ===== Generic layout utilities ===== */
+.nd_booking_display_inline_block {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.nd_booking_display_table {
+  display: revert;
+}
+
+/* Inline groups */
+.elem-group.inlined,
+.elem-group2 {
+  display: inline-block;
+  position: relative;
+  padding: 10px 20px;
+}
+
+.elem-group.inlined label {
+  color: var(--offwhite);
+}
+
+.elem-group2 {
+  top: 30px;
+}
+
+.textwidget.custom-html-widget form.form .elem-group2 {
+  top: 0;
+}
+
+/* ===== Typography / headings ===== */
+.nd_options_customizer_fonts .nicdark_site p {
+  font-size: 18px;
+  line-height: 25px;
+  color: var(--ink);
+}
+
+.spa-heading {
+  font-size: 20px;
+  font-weight: 700;
+  color: #13306a;
+}
+
+body.single-nd_booking_cpt_1 #nd_booking_single_cpt_1_similar_rooms .nd_booking_rooms_component_similar h1 {
+  text-align: center;
+}
+
+/* ===== ND Booking specifics ===== */
+.nd_booking_width_33_percentage .nd_booking_section .nd_booking_display_table.nd_booking_float_left {
+  display: none;
+}
+
+.nd_booking_display_table p::before {
+  font-family: "Font Awesome 6 Free", "Font Awesome 5 Free", sans-serif;
+  font-weight: 900;
+  content: "\f058";
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 15px;
+  margin-right: 6px;
+  color: var(--brand-green);
+}
+
+#nd_booking_single_cpt_1_basic_info,
+form#nd_booking_single_cpt_1_calendar {
+  display: none;
+}
+
+.rooms .nd_booking_margin_right_20 {
+  display: none;
+}
+
+/* ===== Forms ===== */
+.textwidget.custom-html-widget form.form {
+  background: var(--slate);
+  padding: 40px 0 66px;
+}
+
+input#checkin-date,
+input#checkout-date {
+  margin-top: 10px;
+  width: 100%;
+  float: left;
+  padding: 10px 20px;
+  border-width: 0 0 1px 0;
+  border-color: #f1f1f1;
+  border-radius: 0;
+}
+
+.elem-group2 input[type="submit"] {
+  background-color: var(--brand-green);
+  color: #fff !important;
+  font-size: 12px;
+  letter-spacing: 2.3px;
+  padding: 15px 40px !important;
+  margin-top: 25px;
+  border: 1px solid #585f77;
+  border-radius: 3px;
+}
+
+.nd_options_customizer_forms input[type="submit"],
+.nd_options_customizer_forms button[type="submit"],
+.give-btn.give-btn-modal {
+  background-color: var(--brand-green) !important;
+}
+
+/* ===== Tables ===== */
+.nd_booking_display_table table th,
+.nd_booking_display_table table td,
+.rooms table th,
+.rooms table td,
+#book-ddd table th,
+#book-ddd table td {
+  border: 1px solid var(--brand-gold);
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+}
+
+tfoot {
+  display: none;
+}
+
+div#book-ddd p {
+  color: #fff;
+  font-size: 18px;
+  line-height: 30px;
+}
+
+/* ===== EAEL Filter Gallery ===== */
+.eael-filter-gallery-control ul li.control {
+  color: #fff !important;
+  background: var(--brand-green);
+  padding: 10px;
+  margin: 10px 8px;
+  border-radius: 5px !important;
+}
+
+/* ===== UFG (Ultimate Filter Gallery) ===== */
+.ufg-parent-filter-button {
+  padding: 5px 35px;
+  font-size: 22px !important;
+}
+
+.ufg-all-filter-button {
+  font-size: 22px !important;
+}
+
+.my-1.ufg-filters {
+  margin: 0 auto;
+}
+
+img.ufg-thumbnail-img.img-fluid.mx-auto.d-block {
+  width: 100%;
+  max-width: 600px;
+  aspect-ratio: 2 / 1;
+  height: auto;
+  object-fit: cover;
+  min-height: 300px;
+}
+
+/* ===== Elementor / sticky header ===== */
+.elementor-sticky--effects {
+  background: #fff;
+}
+
+.elementor-sticky--effects img {
+  height: 100px;
+}
+
+/* Width fixes for specific Elementor instances */
+@media (max-width: 600px) {
+  .elementor-10848 .elementor-element.elementor-element-7f81f8a,
+  .elementor-10848 .elementor-element.elementor-element-a0cd9af {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 767px) {
+  section#footer-main h4 {
+    text-align: center !important;
+  }
+
+  section#footer-main li.elementor-icon-list-item a {
+    text-align: center !important;
+  }
+
+  .elementor-sticky--effects {
+    position: fixed;
+    top: 0 !important;
+  }
+}
+
+/* ===== Full-bleed fixes on Spanish pages ===== */
+html[lang="es-ES"] .elementor-section.elementor-section-stretched {
+  width: 100vw !important;
+  left: calc(50% - 50vw) !important;
+  right: auto !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+html[lang="es-ES"] .elementor-section.elementor-section-full_width > .elementor-container,
+html[lang="es-ES"] .elementor-section.elementor-section-boxed > .elementor-container {
+  max-width: 100% !important;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+html[lang="es-ES"] .nd_options_container {
+  max-width: none !important;
+  width: 100% !important;
+  padding-left: 0;
+  padding-right: 0;
+  overflow: visible !important;
+}
+
+/* ===== Misc ===== */
+a#slider-5-slide-5-layer-39 {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .nd_booking_alert_msg {
+    left: 10px;
+    right: 10px;
+    width: auto;
+  }
+
+  .nd_booking_display_inline_block {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .elem-group2 input[type="submit"] {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nd_booking_display_table table th,
+  .nd_booking_display_table table td,
+  .rooms table th,
+  .rooms table td,
+  #book-ddd table th,
+  #book-ddd table td {
+    font-size: 12px;
+    padding: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nd_booking_alert_msg,
+  .nicdark_navigation_1_sidebar_content {
+    transition: none;
+  }
+}
