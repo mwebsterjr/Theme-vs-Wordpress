@@ -18,7 +18,7 @@ function nicdark_register_required_plugins() {
         array(
             'name'      => esc_html__( 'Wordpress Importer', 'marina' ),
             'slug'      => 'wordpress-importer',
-            'required'  => true,
+            'required'  => false,
         ),
 
 
@@ -49,28 +49,28 @@ function nicdark_register_required_plugins() {
         array(
             'name'      => esc_html__( 'Contact Form 7', 'marina' ),
             'slug'      => 'contact-form-7',
-            'required'  => true,
+            'required'  => false,
         ),
 
         //woocommerce
         array(
             'name'      => esc_html__( 'WooCommerce', 'marina' ),
             'slug'      => 'woocommerce',
-            'required'  => true,
+            'required'  => false,
         ),
 
         //motopress-hotel-booking-lite
         array(
             'name'      => esc_html__( 'Hotel Booking', 'marina' ),
             'slug'      => 'motopress-hotel-booking-lite',
-            'required'  => true,
+            'required'  => false,
         ),
 
         //mphb-elementor
         array(
             'name'      => esc_html__( 'Hotel Booking - Elementor', 'marina' ),
             'slug'      => 'mphb-elementor',
-            'required'  => true,
+            'required'  => false,
         ),
         
 
@@ -153,11 +153,6 @@ function nicdark_enqueue_scripts()
         wp_enqueue_style( 'nicdark-fonts', $nicdark_google_font, array(), $nicdark_version );
     }
 
-    $nicdark_google_font_secondary = nicdark_google_fontss_url();
-    if ( $nicdark_google_font_secondary ) {
-        wp_enqueue_style( 'nicdark-fontss', $nicdark_google_font_secondary, array(), $nicdark_version );
-    }
-
     if ( post_type_exists( 'nd_booking_cpt_1' ) && ( is_singular( 'nd_booking_cpt_1' ) || is_post_type_archive( 'nd_booking_cpt_1' ) ) ) {
         wp_enqueue_style( 'nicdark-nd-booking-overrides', get_template_directory_uri() . '/css/nd-booking-overrides.css', array( 'nicdark-style' ), $nicdark_version );
     }
@@ -233,27 +228,7 @@ function nicdark_google_fonts_url() {
     if ( 'off' !== _x( 'on', 'Google font: on or off', 'marina' ) ) {
         $nicdark_font_url = add_query_arg(
             array(
-                'family' => urlencode( 'Jost:300,400,500,600,700' ),
-                'display' => 'swap',
-            ),
-            'https://fonts.googleapis.com/css'
-        );
-    }
-
-    return $nicdark_font_url;
-
-}
-//END add google fonts
-
-
-function nicdark_google_fontss_url() {
-
-    $nicdark_font_url = '';
-
-    if ( 'off' !== _x( 'on', 'Google font: on or off', 'marina' ) ) {
-        $nicdark_font_url = add_query_arg(
-            array(
-                'family' => urlencode( 'Italiana:300,400,500,600,700' ),
+                'family' => urlencode( 'Jost:300,400,500,600,700|Italiana:400,500,600,700' ),
                 'display' => 'swap',
             ),
             'https://fonts.googleapis.com/css'
@@ -271,7 +246,7 @@ function nicdark_resource_hints( $urls, $relation_type ) {
         return $urls;
     }
 
-    $fonts_enqueued = wp_style_is( 'nicdark-fonts', 'enqueued' ) || wp_style_is( 'nicdark-fontss', 'enqueued' );
+    $fonts_enqueued = wp_style_is( 'nicdark-fonts', 'enqueued' );
 
     if ( $fonts_enqueued ) {
         $urls[] = array(
