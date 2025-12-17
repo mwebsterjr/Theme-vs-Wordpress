@@ -34,6 +34,10 @@ Text Domain: marina
 .nicdark_open_navigation_1_sidebar_content,
 .nicdark_close_navigation_1_sidebar_content {
     outline: none;
+    background: transparent;
+    border: 0;
+    padding: 8px;
+    cursor: pointer;
 }
 
 .nicdark_open_navigation_1_sidebar_content:focus-visible,
@@ -2253,6 +2257,21 @@ table {
 .nicdark_navigation_1_sidebar_content.is-open {
     right: 0;
     box-shadow: -6px 0 18px rgba(0,0,0,0.18);
+}
+
+.nicdark-mobile-nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease;
+    z-index: 998;
+}
+
+.nicdark-mobile-nav-overlay.is-visible {
+    opacity: 1;
+    visibility: visible;
 }
 
 body.nicdark_nav_open {
