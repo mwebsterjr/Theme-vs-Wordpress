@@ -5,8 +5,8 @@ Description: Wonderful theme for your Business.
 Author: Nicdark
 Author URI: http://www.nicdarkthemes.com
 Version: 3.0
-Tested up to: 6.8
-Requires PHP: 7.0
+Tested up to: 6.9
+Requires PHP: 8.1
 License: http://www.nicdarkthemes.com
 License URI: http://www.nicdarkthemes.com
 Tags: one-column, two-columns, right-sidebar, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, sticky-post, translation-ready
@@ -2207,11 +2207,27 @@ table {
 
 
 .nicdark_navigation_1 {
-    padding: 30px 20px 30px 20px;  
-  
+    padding: 30px 20px 30px 20px;
+
     background-repeat: no-repeat;
     background-position: 20px 54px;
-    background-size: 20px;  
+    background-size: 20px;
+}
+
+.nicdark_navigation_1_sidebar_content {
+    right: -320px;
+    width: 320px;
+    max-width: 90%;
+    transition: right 0.35s ease;
+}
+
+.nicdark_navigation_1_sidebar_content.is-open {
+    right: 0;
+    box-shadow: -6px 0 18px rgba(0,0,0,0.18);
+}
+
+body.nicdark_nav_open {
+    overflow: hidden;
 }
 
 
@@ -2230,6 +2246,10 @@ table {
         margin-top:-10px;
         margin-bottom:20px;
         display: inline-block;
+    }
+
+    .nicdark_navigation_1_sidebar_content {
+        padding: 60px 30px 40px 30px;
     }
 
 }

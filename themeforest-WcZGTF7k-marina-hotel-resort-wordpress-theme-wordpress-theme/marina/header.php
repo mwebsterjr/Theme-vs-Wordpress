@@ -79,7 +79,7 @@
 
             <!--open menu responsive icon-->
             <div class="nicdark_section nicdark_display_none nicdark_display_block_responsive">
-                <a class="nicdark_open_navigation_1_sidebar_content nicdark_open_navigation_1_sidebar_content" href="#">
+                <a class="nicdark_open_navigation_1_sidebar_content" href="#" role="button" aria-expanded="false" aria-controls="nicdark-mobile-nav">
                     <img alt="<?php esc_attr_e('Open mobile navigation','marina'); ?>" width="25" src="<?php echo esc_url(get_template_directory_uri()); ?>/img/icon-menu-grey.png">
                 </a>
             </div>
@@ -102,11 +102,11 @@
 
 
 <!--START menu responsive-->
-<div class="nicdark_padding_100_40 nicdark_padding_bottom_40 nicdark_bg_black nicdark_custom_menu_bg nicdark_navigation_1_sidebar_content nicdark_box_sizing_border_box nicdark_overflow_hidden nicdark_overflow_y_auto nicdark_transition_all_08_ease nicdark_height_100_percentage nicdark_position_fixed nicdark_width_300 nicdark_right_300_negative nicdark_z_index_999">
+<div id="nicdark-mobile-nav" class="nicdark_padding_100_40 nicdark_padding_bottom_40 nicdark_bg_black nicdark_custom_menu_bg nicdark_navigation_1_sidebar_content nicdark_box_sizing_border_box nicdark_overflow_hidden nicdark_overflow_y_auto nicdark_transition_all_08_ease nicdark_height_100_percentage nicdark_position_fixed nicdark_width_300 nicdark_right_300_negative nicdark_z_index_999" aria-hidden="true">
 
     <div class="nicdark_bg_orange nicdark_width_300 nicdark_position_fixed nicdark_top_0 nicdark_text_align_center nicdark_margin_left_negative_40 nicdark_padding_top_20 nicdark_padding_bottom_20 nicdark_border_1_dashed_color">
 
-        <img alt="<?php esc_attr_e('Close mobile navigation','marina'); ?>" width="10" class="nicdark_close_navigation_1_sidebar_content nicdark_cursor_pointer nicdark_right_20 nicdark_top_29 nicdark_position_absolute" src="<?php echo esc_url(get_template_directory_uri()); ?>/img/icon-close.png">
+        <img alt="<?php esc_attr_e('Close mobile navigation','marina'); ?>" width="10" class="nicdark_close_navigation_1_sidebar_content nicdark_cursor_pointer nicdark_right_20 nicdark_top_29 nicdark_position_absolute" src="<?php echo esc_url(get_template_directory_uri()); ?>/img/icon-close.png" role="button">
 
         <!--START LOGO OR TAGLINE-->
         <?php
