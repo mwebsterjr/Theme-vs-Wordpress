@@ -7,6 +7,8 @@ if ( ! defined( 'NICDARK_THEME_VERSION' ) ) {
 
 $nicdark_themename = "marina";
 
+require_once get_template_directory() . '/inc/setup.php';
+
 //TGMPA required plugin
 require_once get_template_directory() . '/class-tgm-plugin-activation.php';
 add_action( 'tgmpa_register', 'nicdark_register_required_plugins' );
@@ -102,10 +104,6 @@ function nicdark_theme_setup_features() {
             'main-menu' => esc_html__( 'Main Menu', 'marina' ),
         )
     );
-
-    if ( ! isset( $GLOBALS['content_width'] ) ) {
-        $GLOBALS['content_width'] = 1330;
-    }
 
     add_theme_support( 'automatic-feed-links' );
     add_theme_support( 'post-thumbnails' );
